@@ -1,0 +1,23 @@
+generate.php -- GET used to generate phrases
+	> grammar -- the grammar to use, corresponding to a folder within "grammars" in the file navigator [math, japanese]
+	> key -- the tag within the language with which to generate phrases
+	> format -- the HTML tag within which to embed each phrase [p, a, div, section, li, ...] (if none, it won't be within a tag)
+	> quantity -- the number of phrases to generate
+
+info.php -- GET used to get info about a grammar
+	> mode -- defining which action to use
+		= exists -- returns boolean value showing whether or not the grammar exists
+		?= url -- gets the relative URL of that language's directory
+		= keys -- returns a JSON array of the grammar's keys, in strings
+		= read -- returns a JSON array of the key (defined below)'s options
+	> key -- used with "mode=read", says which key of which to read options
+
+delete.php -- POST used to delete a grammar or key
+	> grammar -- grammar to delete or delete a key from
+	> key -- key to delete (if omitted, deletes the full grammar)
+	> definition -- definition to delete (if omitted, deletes the full key)
+
+add.php -- POST used to add or edit a grammar or key
+	> grammar -- grammar to add key to (if nonexistent, gets created) (if the only argument, clears the grammar)
+	> key -- key to add (if nonexistent, gets created) (if the only argument, clears the key)
+	> definition -- definition to add to the key
