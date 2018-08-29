@@ -1,9 +1,14 @@
 <?php {
 	
+	# formats a certain word into the key notation format for easy adaptation
+	#	@sam-masaki edit this to match your personal chosen data format
 	function word_to_key($word) {
 		return "\$$word";
 	}
 	
+	# Parses a "language.txt" file into an associative array representing
+	# a grammatical structure. Associative array format:
+	#		key => array(def0, def1, def2, ...)
 	function parse_grammar($grammar_name) {
 		
 		$file = file_get_contents("../grammars/$grammar_name/language.txt");

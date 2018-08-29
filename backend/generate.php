@@ -33,11 +33,13 @@
 	
 	# iterates calculation and output of the appropriately generated value
 	for ($i = 0; $i < $quantity; $i++) {
-		print($start_tag);
+		print($start_tag);	# starting HTML tag for each value
 		
+		# PLACEHOLDER -- prints out calculated grammar strucutre from the
+		# function parse_grammar in grammarParser.php
 		print_r($grammar);
 		
-		print($end_tag);
+		print($end_tag);	# ending HTML tag for each value
 	}
 	
 } ?>
