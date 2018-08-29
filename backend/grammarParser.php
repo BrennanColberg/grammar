@@ -1,7 +1,7 @@
 <?php {
 	
 	function word_to_key($word) {
-		return "<$word>";
+		return "\$$word";
 	}
 	
 	function parse_grammar($grammar_name) {
