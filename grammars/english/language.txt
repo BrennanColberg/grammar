@@ -1,0 +1,8 @@
+$sentence ::= $article $noun $verb
+$article ::= $indefinite_article | $definite_article
+$indefinite_article ::= !indefinite_articles.txt
+$definite_article ::= !definite_articles.txt
+$noun ::= $adjective $noun | !nouns.txt
+$adjective ::= !adjectives.txt
+$verb ::= $adverb $verb | !verbs.txt
+$adverb ::= !adverbs.txt

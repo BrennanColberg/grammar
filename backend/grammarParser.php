@@ -9,9 +9,9 @@
 	# Parses a "language.txt" file into an associative array representing
 	# a grammatical structure. Associative array format:
 	#		key => array(def0, def1, def2, ...)
-	function parse_grammar($grammar_name) {
+	function parse_grammar($grammar) {
 		
-		$file = file_get_contents("../grammars/$grammar_name/language.txt");
+		$file = file_get_contents("../grammars/$grammar/language.txt");
 		$file_lines = explode("\n", $file);
 		
 		$grammar_rules = array();
@@ -21,12 +21,30 @@
 			$definitions = explode("|", $line[1]);
 			$grammar_rules[$term] = array();
 			for ($d = 0; $d < count($definitions); $d++) {
-				$grammar_rules[$term][] = trim($definitions[$d]);
+				$definition = trim($definitions[$d]);
+				# testing to see if there's a file in format "!file.txt"
+				$is_link = $definition[0] === "!";
+				if ($is_link) {
+					$link = substr($definition, 1);
+					$definition_list = parse_file($grammar, $link);
+					for ($l = 0; $l < count($definition_list); $l++) {
+						$grammar_rules[$term][] = $definition_list[$l];
+					}
+				} else {
+					$grammar_rules[$term][] = $definition;
+				}
 			}
 		}
 		
 		return $grammar_rules;
 		
+	}
+	
+	# parses a file into its constituent lines for easy addition to a
+	# definition list in parse_grammar
+	function parse_file($grammar, $file_name) {
+		$file = file_get_contents("../grammars/$grammar/$file_name");
+		return explode("\n", $file);
 	}
 	
 } ?>
