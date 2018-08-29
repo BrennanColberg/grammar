@@ -21,6 +21,10 @@
 	
 	# getting the key and validating that the grammar contains it
 	$key = $_GET["key"];
+	if (!in_array($key, array_keys($grammar_rules))) {
+		print("yo wtf that's an invalid input dumbass");
+		exit();
+	}
 	
 	# HTML format within which to output calculated value
 	$format = $_GET["format"];
