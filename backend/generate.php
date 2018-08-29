@@ -6,8 +6,18 @@
 #		> format -- the HTML tag within which to embed each phrase [p, a, div, section, li, ...] (if none, it won't be within a tag)
 #		> quantity -- the number of phrases to generate
 	
-	# loading the specified grammar
+	# loading the specified grammar into $grammar_rules
 	$grammar = $_GET["grammar"];
+	$language_file = file_get_contents("../grammars/$grammar/language.txt");
+	$language_file = explode("\n", $language_file);
+	$grammar_rules = array();
+	for ($i = 0; $i < count($language_file); $i++) {
+		$line = $language_file[$i];
+		$line = explode("::=", $line);
+		$term = trim($line[0]);
+		$definition = trim($line[1]);
+		$grammar_rules[$term] = $definition;
+	}
 	
 	# getting the key and validating that the grammar contains it
 	$key = $_GET["key"];
@@ -25,7 +35,7 @@
 	for ($i = 0; $i < $quantity; $i++) {
 		print($start_tag);
 		
-		
+		print_r($grammar_rules);
 		
 		print($end_tag);
 	}
