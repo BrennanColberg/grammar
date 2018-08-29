@@ -1,1 +1,1 @@
-noun ::= [nouns.txt]
+$noun ::= [nouns.txt]
