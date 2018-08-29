@@ -13,7 +13,11 @@
 	
 	# getting the key and validating that the grammar contains it
 	$key = $_GET["key"];
-	if (!in_array($key, array_keys($grammar))) {
+	if (in_array($key, array_keys($grammar))) {
+		$definition = $grammar[$key];
+	} else if (in_array(word_to_key($key), array_keys($grammar))) {
+		$definition = $grammar[word_to_key($key)];
+	} else {
 		print("yo wtf that's an invalid input dumbass");
 		exit();
 	}

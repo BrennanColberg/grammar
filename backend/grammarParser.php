@@ -1,5 +1,9 @@
 <?php {
 	
+	function word_to_key($word) {
+		return "<$word>";
+	}
+	
 	function parse_grammar($grammar_name) {
 		
 		$file = file_get_contents("../grammars/$grammar_name/language.txt");
@@ -12,7 +16,7 @@
 			$definitions = explode("|", $line[1]);
 			$grammar_rules[$term] = array();
 			for ($d = 0; $d < count($definitions); $d++) {
-				$grammar_rules[$term][] = $definitions[$d];
+				$grammar_rules[$term][] = trim($definitions[$d]);
 			}
 		}
 		
