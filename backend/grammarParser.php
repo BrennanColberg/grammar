@@ -19,7 +19,7 @@
 			$line = explode("::=", $file_lines[$i]);
 			$term = trim($line[0]);
 			$definitions = explode("|", $line[1]);
-			$grammar_rules[$term] = array();
+			$term_array = array();
 			for ($d = 0; $d < count($definitions); $d++) {
 				$definition = trim($definitions[$d]);
 				# testing to see if there's a file in format "!file.txt"
@@ -28,16 +28,19 @@
 					$link = substr($definition, 1);
 					$definition_list = parse_file($grammar, $link);
 					for ($l = 0; $l < count($definition_list); $l++) {
-						$grammar_rules[$term][] = $definition_list[$l];
+						if ($definition_list[$l]) { # definition must be non-null
+							$grammar_rules[$term][] = $definition_list[$l];
+						}
 					}
-				} else {
+				} else if ($definition) {	# definition must be non-null
 					$grammar_rules[$term][] = $definition;
 				}
 			}
+			if (count($term_array)) {	# term array non-empty
+				$grammar_rules[$term] = $term_array;
+			}
 		}
-		
 		return $grammar_rules;
-		
 	}
 	
 	# parses a file into its constituent lines for easy addition to a
