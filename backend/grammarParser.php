@@ -40,9 +40,7 @@
 				$grammar_rules[$term] = $term_array;
 			}
 		}
-		if (count($grammar_rules)) {	# rules array non-empty
-			return $grammar_rules;
-		}
+		return $grammar_rules;
 	}
 	
 	# parses a file into its constituent lines for easy addition to a

@@ -21,9 +21,21 @@
 	} else if ($mode === "keys" && $grammar) {
 		include('grammarParser.php');
 		header('Content-Type: application/json');
-		print(json_encode(array_keys(parse_grammar($grammar))));
+		$grammar_rules = parse_grammar($grammar);
+		if ($grammar_rules) {	# grammar must be valid
+			$keys = array_keys($grammar_rules);
+			print(json_encode($keys));
+		}
 	} else if ($mode === "define" && $grammar && $key) {
-		
+		include('grammarParser.php');
+		header('Content-Type: application/json');
+		$grammar_rules = parse_grammar($grammar);
+		if ($grammar_rules) {	# grammar must be valid
+			$definitions = $grammar_rules[$key];
+			if ($definitions) {	# key must be valid
+				print(json_encode($definitions));
+			}
+		}
 	}
 	
 } ?>
