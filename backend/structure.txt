@@ -6,7 +6,6 @@ generate.php -- GET used to generate phrases
 
 info.php -- GET used to get info about a grammar
 	> mode -- defining which action to use
-		= exists -- returns boolean value about the grammar existing
 		= keys -- returns a JSON array of the grammar's keys, in strings
 		= define -- returns JSON array of the key's definitions
 	> grammar -- the grammar to get info about
