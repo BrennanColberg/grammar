@@ -6,11 +6,11 @@ generate.php -- GET used to generate phrases
 
 info.php -- GET used to get info about a grammar
 	> mode -- defining which action to use
-		= exists -- returns boolean value showing whether or not the grammar exists
-		?= url -- gets the relative URL of that language's directory
+		= exists -- returns boolean value about the grammar existing
 		= keys -- returns a JSON array of the grammar's keys, in strings
-		= read -- returns a JSON array of the key (defined below)'s options
-	> key -- used with "mode=read", says which key of which to read options
+		= define -- returns JSON array of the key's definitions
+	> grammar -- the grammar to get info about
+	> key -- the key to get info about
 
 delete.php -- POST used to delete a grammar or key
 	> grammar -- grammar to delete or delete a key from
