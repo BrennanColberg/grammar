@@ -5,4 +5,4 @@ $definite_article ::= !definite_articles.txt
 $noun ::= $adjective $noun | !nouns.txt
 $adjective ::= !adjectives.txt
 $verb ::= $adverb $verb | !verbs.txt
-$adverb ::= !adverbs.txt
+$adverb ::= !adverbs.txt 
