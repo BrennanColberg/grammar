@@ -13,9 +13,7 @@
 	
 	# getting the key and validating that the grammar contains it
 	$key = $_GET["key"];
-	if (in_array($key, array_keys($grammar))) {
-		$definitions = $grammar[$key];
-	} else {
+	if (!in_array($key, array_keys($grammar))) {
 		exit();
 	}
 	
@@ -31,10 +29,6 @@
 	# iterates calculation and output of the appropriately generated value
 	for ($i = 0; $i < $quantity; $i++) {
 		print($start_tag);	# starting HTML tag for each value
-		
-		# PLACEHOLDER -- prints out calculated grammar strucutre from the
-		# function parse_grammar in grammarParser.php
-		# print_r($grammar);
 
 		$string = fulfill_tags($key, $grammar);
 		print($string);
@@ -46,14 +40,10 @@
 		$result = $string;
 		for ($i = 0; $i < count(array_keys($grammar)); $i++) {
 			$key = array_keys($grammar)[$i];
-			$strpos = strpos($string, $key);
 			if (strpos($result, $key) !== false) {
-				print("wow there's a $key!\n");
 				$chosen_index = mt_rand(0, count($grammar[$key]) - 1);
 				$chosen_definition = $grammar[$key][$chosen_index];
-				print("replacing it with '$chosen_definition'...\n");
 				$result = str_replace($key, $chosen_definition, $result);
-				print("...and now it reads '$result'!\n\n");
 				$result = fulfill_tags($result, $grammar);
 			}
 		}
