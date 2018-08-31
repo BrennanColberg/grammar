@@ -36,11 +36,28 @@
 		# function parse_grammar in grammarParser.php
 		# print_r($grammar);
 
-		$chosen_index = mt_rand(0, count($definitions) - 1);
-		$chosen_definition = $definitions[$chosen_index];
-		print($chosen_definition);
+		$string = fulfill_tags($key, $grammar);
+		print($string);
 		
 		print($end_tag);	# ending HTML tag for each value
+	}
+	
+	function fulfill_tags($string, $grammar) {
+		$result = $string;
+		for ($i = 0; $i < count(array_keys($grammar)); $i++) {
+			$key = array_keys($grammar)[$i];
+			$strpos = strpos($string, $key);
+			if (strpos($result, $key) !== false) {
+				print("wow there's a $key!\n");
+				$chosen_index = mt_rand(0, count($grammar[$key]) - 1);
+				$chosen_definition = $grammar[$key][$chosen_index];
+				print("replacing it with '$chosen_definition'...\n");
+				$result = str_replace($key, $chosen_definition, $result);
+				print("...and now it reads '$result'!\n\n");
+				$result = fulfill_tags($result, $grammar);
+			}
+		}
+		return $result;
 	}
 	
 } ?>
