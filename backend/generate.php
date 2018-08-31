@@ -14,7 +14,7 @@
 	# getting the key and validating that the grammar contains it
 	$key = $_GET["key"];
 	if (in_array($key, array_keys($grammar))) {
-		$definition = $grammar[$key];
+		$definitions = $grammar[$key];
 	} else {
 		exit();
 	}
@@ -34,7 +34,11 @@
 		
 		# PLACEHOLDER -- prints out calculated grammar strucutre from the
 		# function parse_grammar in grammarParser.php
-		print_r($grammar);
+		# print_r($grammar);
+
+		$chosen_index = mt_rand(0, count($definitions) - 1);
+		$chosen_definition = $definitions[$chosen_index];
+		print($chosen_definition);
 		
 		print($end_tag);	# ending HTML tag for each value
 	}
