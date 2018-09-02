@@ -2,8 +2,8 @@
 	
 #	info.php -- GET used to get info about a grammar
 #	> mode -- defining which action to use
-#		= keys -- returns a JSON array of the grammar's keys, in strings
-#		= define -- returns JSON array of the key's definitions
+#		= list -- returns a JSON array of the specified thing's children
+#		= url -- returns the string URL of specified grammar
 #	> grammar -- the grammar to get info about
 #	> key -- the key to get info about
 	
@@ -15,14 +15,10 @@
 	
 	if ($mode === "url" && $grammar) {
 		print(json_encode("../grammars/$grammar/"));
-	} else if ($mode === "keys" && $grammar) {
-		include('grammarParser.php');
-		$grammar_rules = parse_grammar($grammar);
-		if ($grammar_rules) {	# grammar must be valid
-			$keys = array_keys($grammar_rules);
-			print(json_encode($keys));
-		}
-	} else if ($mode === "define" && $grammar && $key) {
+	}
+	
+	# lists the potential definitions of a key
+	else if ($mode === "list" && $grammar && $key) {
 		include('grammarParser.php');
 		$grammar_rules = parse_grammar($grammar);
 		if ($grammar_rules) {	# grammar must be valid
@@ -31,6 +27,23 @@
 				print(json_encode($definitions));
 			}
 		}
+	}
+	
+	# lists the keys within a grammar
+	else if ($mode === "list" && $grammar) {
+		include('grammarParser.php');
+		$grammar_rules = parse_grammar($grammar);
+		if ($grammar_rules) {	# grammar must be valid
+			$keys = array_keys($grammar_rules);
+			print(json_encode($keys));
+		}
+	}
+	
+	# lists all potential grammars
+	else if ($mode === "list") {
+		$files = scandir("../grammars/");
+		$files = array_slice($files, 2);
+		print(json_encode($files));
 	}
 	
 } ?>
