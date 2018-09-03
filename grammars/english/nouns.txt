@@ -1676,7 +1676,6 @@ fruit
 frustration
 fuel
 fulfillment
-full
 fun
 function
 fundraising
@@ -2033,11 +2032,8 @@ ice-cream
 icicle
 icon
 idea
-ideal
-if
 igloo
 ikebana
-illegal
 image
 imagination
 impact
@@ -2130,7 +2126,6 @@ ironclad
 irony
 island
 issue
-it
 item
 jackal
 jacket
@@ -2626,13 +2621,11 @@ mustache
 mustard
 mutt
 mycoplasma
-n
 nail
 name
 naming
 nanoparticle
 napkin
-nasty
 nation
 national
 native
@@ -4286,7 +4279,6 @@ unemployment
 unibody
 uniform
 union
-unique
 unit
 unity
 university

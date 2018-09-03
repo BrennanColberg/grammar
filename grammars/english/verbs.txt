@@ -1,3 +1,6 @@
-speaks
-eats
-says hi
+is $adjective
+has $article $noun
+says "$sentence"
+goes to $article $noun
+gets $article $noun
+makes $article $noun
