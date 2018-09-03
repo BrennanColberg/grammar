@@ -1,3 +1,4 @@
+attached to $article $noun
 attractive
 bald
 beautiful
@@ -255,3 +256,4 @@ little
 scarce
 sparse
 substantial
+political

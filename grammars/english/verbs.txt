@@ -1,6 +1,6 @@
 is $adjective
 has $article $noun
-says "$sentence"
+said "$sentence"
 goes to $article $noun
 gets $article $noun
 makes $article $noun
@@ -13,7 +13,6 @@ runs
 moves
 continues
 speaks
-is made out of $noun
 stops
 speaks
 reads
