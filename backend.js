@@ -19,7 +19,7 @@
 		console.log("key is " + key);
 		let quantity = $("quantity").value;
 		console.log("quantity is " + quantity);
-		ajaxGET("backend/generate.php?format=li&grammar=" + grammar + "&key=" + key + "&quantity=" + quantity, function(html) {
+		ajaxGET("backend/generate.php?format=p&grammar=" + grammar + "&key=" + key + "&quantity=" + quantity, function(html) {
 			$("output").innerHTML = html;
 		});
 	}
