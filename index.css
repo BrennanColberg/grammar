@@ -1,4 +1,28 @@
-.center{
-  width: 50%
+body{
+  background-color: #FFFACD;
+}
+
+section{
+  display: block;
+  width: 50%;
   margin:auto;
+  text-align: center;
+}
+
+.button{
+    background-color: #FF6347;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+    border: 2px solid #FF6347;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
 }
