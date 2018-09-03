@@ -4,3 +4,19 @@ says "$sentence"
 goes to $article $noun
 gets $article $noun
 makes $article $noun
+takes $article $noun
+knows that $sentence
+thinks that $sentence
+turns
+starts
+runs
+moves
+continues
+speaks
+is made out of $noun
+stops
+speaks
+reads
+loves $noun
+remembers $article $noun
+pulls
