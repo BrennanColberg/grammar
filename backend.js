@@ -41,8 +41,8 @@
 		let data = JSON.parse(json);
 		for (let i = 0; i < data.length; i++) {
 			let option = ce("option");
-			option.value = data[i];
-			option.textContent = data[i];
+			option.value = data[i]["key"];
+			option.textContent = data[i]["name"];
 			select.appendChild(option);
 		}
 	}

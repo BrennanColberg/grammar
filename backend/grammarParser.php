@@ -10,13 +10,10 @@
 	# a grammatical structure. Associative array format:
 	#		key => array(def0, def1, def2, ...)
 	function parse_grammar($grammar) {
-		
-		$file = file_get_contents("../grammars/$grammar/language.txt");
-		$file_lines = explode("\n", $file);
-		
+		$file = parse_file($grammar, "language.txt");
 		$grammar_rules = array();
-		for ($i = 0; $i < count($file_lines); $i++) {
-			$line = explode("::=", $file_lines[$i]);
+		for ($i = 0; $i < count($file); $i++) {
+			$line = explode("::=", $file[$i]);
 			$term = trim($line[0]);
 			$definitions = explode("|", $line[1]);
 			$term_array = array();
@@ -41,6 +38,22 @@
 			}
 		}
 		return $grammar_rules;
+	}
+	
+	# parses a "display" file to find the display names for each
+	# tag in a language, etc
+	function parse_display($grammar) {
+		$file = parse_file($grammar, "display.txt");
+		$grammar_display = array();
+		for ($i = 0; $i < count($file); $i++) {
+			$line = explode("=", $file[$i]);
+			$term = trim($line[0]);
+			$display = trim($line[1]);
+			if ($display) {
+				$grammar_display[$term] = $display;
+			}
+		}
+		return $grammar_display;
 	}
 	
 	# parses a file into its constituent lines for easy addition to a
