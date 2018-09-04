@@ -53,9 +53,24 @@
 	
 	# lists all potential grammars
 	else if ($mode === "list") {
-		$files = scandir("../grammars/");
-		$files = array_slice($files, 2);
-		print(json_encode($files));
+		include('grammarParser.php');
+		$grammars = scandir("../grammars/");
+		$grammars = array_slice($grammars, 3);
+		$display = parse_display(".");
+		if ($grammars && $display) {
+			$result = array();
+			$keys = array_keys($display);
+			for ($i = 0; $i < count($keys); $i++) {
+				$key = $keys[$i];
+				if (in_array($key, $grammars)) {
+					$item = array();
+					$item["key"] = $key;
+					$item["name"] = $display[$key];
+					$result[] = $item;
+				}
+			}
+			print(json_encode($result));
+		}
 	}
 	
 } ?>

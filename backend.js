@@ -25,22 +25,16 @@
 	}
 	
 	function loadGrammarOptions(json) {
-		let select = $("grammar");
-		while (select.firstChild) {
-			select.removeChild(select.firstChild);
-		}
-		let data = JSON.parse(json);
-		for (let i = 0; i < data.length; i++) {
-			let option = ce("option");
-			option.value = data[i];
-			option.textContent = data[i];
-			select.appendChild(option);
-		}
+		loadOptionsJSON($("grammar"), json);
 		ajaxGET("backend/info.php?mode=list&grammar=" + $("grammar").value, loadKeyOptions);
 	}
 	
 	function loadKeyOptions(json) {
-		let select = $("key");
+		loadOptionsJSON($("key"), json);
+		generate();
+	}
+	
+	function loadOptionsJSON(select, json) {
 		while (select.firstChild) {
 			select.removeChild(select.firstChild);
 		}
