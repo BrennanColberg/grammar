@@ -1,3 +1,2 @@
 english = English
-japanese = Japanese
 math = Math
