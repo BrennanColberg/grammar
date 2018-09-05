@@ -40,10 +40,13 @@
 		$result = $string;
 		for ($i = 0; $i < count(array_keys($grammar)); $i++) {
 			$key = array_keys($grammar)[$i];
-			if (strpos($result, $key) !== false) {
+			while (strpos($result, $key) !== false) {
 				$chosen_index = mt_rand(0, count($grammar[$key]) - 1);
 				$chosen_definition = $grammar[$key][$chosen_index];
-				$result = str_replace($key, $chosen_definition, $result);
+				$key_index = strpos($result, $key);
+				$prior_string = substr($result, 0, $key_index);
+				$latter_string = substr($result, $key_index + strlen($key), strlen($result) - strlen($key));
+				$result = $prior_string . $chosen_definition . $latter_string;
 				$result = fulfill_tags($result, $grammar);
 			}
 		}
