@@ -1,4 +1,4 @@
-attached to $article $noun
+attached to $full_noun
 attractive
 bald
 beautiful
