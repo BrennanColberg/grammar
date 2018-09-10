@@ -9,6 +9,24 @@
 "use strict";
 (function() {
 	
+	// shortened DOM manipulation methods
+	function $(id) { return document.getElementById(id); }
+	function ce(tag) { return document.createElement(tag); }
+	// generic AJAX GET method, adapted from my code hosted online at
+	// https://brennancolberg.github.io/abbr/js/ajax.js
+	function ajaxGET(url, onSuccess) {
+		fetch(url, { credentials: "include" })
+			.then(function(r) { 
+				if (r.status >= 200 && r.status < 300) {
+					return r.text();
+				}
+			})
+			.then(onSuccess)
+			.catch(function(e) { 
+				console.log(e);
+			});
+	}
+	
 	window.addEventListener("load", function() {
 		// loads all of the valid "grammars" from backend
 		loadGrammarOptions();
@@ -28,7 +46,8 @@
 		let key = $("key").value;
 		let quantity = $("quantity").value;
 		// queries generate.php for random output based ocnvalues
-		ajaxGET("backend/generate.php?grammar=" + grammar + "&string=" + 		key + "&quantity=" + quantity, function(html) {
+		ajaxGET("backend/generate.php?grammar=" + grammar + "&string=" +
+				key + "&quantity=" + quantity, function(html) {
 			$("output").innerHTML = html;
 		});
 	}
