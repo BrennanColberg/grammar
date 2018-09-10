@@ -8,6 +8,7 @@
  * optimized fashion.
 **/
 
+header('Content-Type: text/html');
 include("grammarParser.php");
 
 # loading GET inputs

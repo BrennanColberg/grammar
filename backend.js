@@ -27,17 +27,16 @@
 		let grammar = $("grammar").value;
 		let key = $("key").value;
 		let quantity = $("quantity").value;
-		// queries generate.php for random output based onvalues
-		ajaxGET("backend/generate.php?format=p&grammar=" + grammar +
-				"&string=" + key + "&quantity=" + quantity, function(x) {
-			$("output").innerHTML = x;
+		// queries generate.php for random output based ocnvalues
+		ajaxGET("backend/generate.php?grammar=" + grammar + "&string=" + 		key + "&quantity=" + quantity, function(html) {
+			$("output").innerHTML = html;
 		});
 	}
 	
 	// populates the "grammar" selector with valid options, obtained
 	// from backend/info.php in JSON format
 	function loadGrammarOptions() {
-		ajaxGET("backend/info.php?mode=list", function(json) {
+		ajaxGET("backend/info.php", function(json) {
 			loadOptionsJSON($("grammar"), json);
 			loadKeyOptions();
 		});
@@ -47,8 +46,7 @@
 	// backend/info.php in JSON format
 	function loadKeyOptions() {
 		let grammar = $("grammar").value;
-		ajaxGET("backend/info.php?mode=list&grammar=" + grammar,
-				function(json) {
+		ajaxGET("backend/info.php?grammar=" + grammar, function(json) {
 			loadOptionsJSON($("key"), json);
 			generate();
 		});
