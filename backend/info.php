@@ -1,12 +1,23 @@
 <?php
 
-/**
+/*************************************************************************
+
+DESCRIPTION:
  * This file is used by backend.js to know which options to display to
  * the user about available grammars (and keys within those grammars).
  * Always outputting in JSON format, it is easily queriable, and adapts
  * its output (without need for "mode"s) to return the appropriate result
  * for each set of arguments.
-**/
+ 
+GET REQUEST FORMAT:
+ * "info.php" -- returns displayable list of grammars
+ * "info.php?grammar=name" -- returns JSON of a displayable list of keys
+ *		within the specified list
+ * "info.php?grammar=name&key=$k" -- returns JSON array of the potential
+ *		coded definitions for the given key within the given grammar
+NO POST REQUEST FORMAT
+ 
+*************************************************************************/
 
 header('Content-Type: application/json');
 include('grammarParser.php');

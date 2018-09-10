@@ -1,10 +1,10 @@
-/**
+/*************************************************************************
  * This JavaScript file interfaces between the PHP-built backend and the
  * HTML/CSS website frontend. It serves to populate this interface with
  * accurate and functional selection and generation options, allowing
  * the user to request generated grammatical structures with whatever
  * specifications they like.
-**/
+*************************************************************************/
 
 "use strict";
 (function() {

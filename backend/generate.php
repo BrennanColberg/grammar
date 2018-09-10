@@ -1,12 +1,26 @@
 <?php
 
-/**
- * This PHP file is used by backend.js, by GET request, to generate values
- * from a grammar and specified key. It uses a grammar model created by
- * grammarParser.php to recursively replace keys with appropriate
- * definitions, thereby generating interesting results in a very
- * optimized fashion.
-**/
+/*************************************************************************
+
+DESCRIPTION:
+ * This PHP file is used by backend.js, by GET request, to generate
+ * values from a grammar and specified key. It uses a grammar model
+ * created by grammarParser.php to recursively replace keys with
+ * appropriate definitions, thereby generating interesting results in a
+ * very optimized fashion.
+
+GET REQUEST FORMAT:
+ * "generate.php?grammar=[name]&string=[str]" -- prints the given string, 
+ *		with any contained keys from the grammar replaced with random
+ *		instances of their given definitions
+ *	+ "&quantity=[num]" -- returns X instances of the random
+ *		replacement(default is 1)
+ *	+ "&format=[tag]" -- formats each instace with HTML tags both
+ *		before and after the text, containing the tag name (e.g. "p" input
+ *	makes output come in format <p>text</p>)
+NO POST REQUEST FORMAT
+
+*************************************************************************/
 
 header('Content-Type: text/html');
 include("grammarParser.php");

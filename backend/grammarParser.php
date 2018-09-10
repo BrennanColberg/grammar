@@ -1,9 +1,15 @@
 <?php
 
-/**
+/*************************************************************************
+
+DESCRIPTION:
  * This PHP file is used solely by others; it provides the machinations
  * which parse the various files used to define a language.
-**/
+
+NO GET REQUEST FORMAT
+NO POST REQUEST FORMAT
+
+*************************************************************************/
 
 # Returns a specified grammar in the form of an associative array
 # holding its grammatical structure (in JSON). Associative array format:
