@@ -29,7 +29,7 @@
 		let quantity = $("quantity").value;
 		// queries generate.php for random output based onvalues
 		ajaxGET("backend/generate.php?format=p&grammar=" + grammar +
-				"&key=" + key + "&quantity=" + quantity, function(x) {
+				"&string=" + key + "&quantity=" + quantity, function(x) {
 			$("output").innerHTML = x;
 		});
 	}
@@ -39,13 +39,14 @@
 	function loadGrammarOptions() {
 		ajaxGET("backend/info.php?mode=list", function(json) {
 			loadOptionsJSON($("grammar"), json);
+			loadKeyOptions();
 		});
 	}
 	
 	// populates the "key" selector with valid options, obtained from
 	// backend/info.php in JSON format
 	function loadKeyOptions() {
-		let grammar = $("grammar").value
+		let grammar = $("grammar").value;
 		ajaxGET("backend/info.php?mode=list&grammar=" + grammar,
 				function(json) {
 			loadOptionsJSON($("key"), json);

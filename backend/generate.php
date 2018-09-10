@@ -12,21 +12,21 @@ include("grammarParser.php");
 
 # loading GET inputs
 $grammar = parse_grammar($_GET["grammar"]);
-$key = $_GET["key"];
+$string = $_GET["string"];
 $quantity = $_GET["quantity"];
-$format = $_GET["format"];
+$format = $_GET["format"]; # hella vulnerable to HTML injection
 
-# checking that the grammar both exists and contains the given key
-if (!$grammar || !in_array($key, array_keys($grammar))) exit();
+# checking that the grammar exists
+if (!$grammar) exit();
 # checks that a quantity has been specified, defaulting to 1
-if (!$quantity) $quantity = 1;
+if (!$quantity || $quantity < 0) $quantity = 1;
 # checks that a format has been specified, defaulting to "p" (<p>)
 if (!$format) $format = "p";
 
 # iterates calculation and output of the appropriately generated value
 for ($i = 0; $i < $quantity; $i++) {
 	print("<$format>");	# starting HTML tag for each value
-	print(fulfill_keys($key, $grammar)); # generated HTML content
+	print(fulfill_keys($string, $grammar)); # generated HTML content
 	print("</$format>\n");	# ending HTML tag for each value
 }
 
@@ -47,7 +47,7 @@ function fulfill_keys($string, $grammar) {
 			# recursively replaces any keys within the new definition
 			# with their definitions, before moving on to use it in
 			# the final resulting string
-			$definition = fulfill_tags($definition, $grammar);
+			$definition = fulfill_keys($definition, $grammar);
 			
 			### REPLACES KEY WITH DEFINITION ###
 			# finds the index where the key exists in the string
