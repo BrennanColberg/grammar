@@ -1,43 +1,68 @@
+/**
+ * This JavaScript file interfaces between the PHP-built backend and the
+ * HTML/CSS website frontend. It serves to populate this interface with
+ * accurate and functional selection and generation options, allowing
+ * the user to request generated grammatical structures with whatever
+ * specifications they like.
+**/
+
 "use strict";
 (function() {
 	
 	window.addEventListener("load", function() {
-		$("grammar").onchange = selectGrammar;
+		// loads all of the valid "grammars" from backend
+		loadGrammarOptions();
+		// sets each input's functionality
+		$("grammar").onchange = loadKeyOptions;
 		$("key").onchange = generate;
+		$("quantity").onchange = generate;
 		$("generate").onclick = generate;
-		ajaxGET("backend/info.php?mode=list", loadGrammarOptions);
 	});
 	
-	function selectGrammar() {
-		ajaxGET("backend/info.php?mode=list&grammar=" + this.value, loadKeyOptions);
-	}
-	
+	// refreshes the output by generating a new set of values
+	// called when the "generate" button is clicked, or whenever
+	// relevant inputs are updated
 	function generate() {
+		// gets input values
 		let grammar = $("grammar").value;
-		console.log("grammar is " + grammar);
 		let key = $("key").value;
-		console.log("key is " + key);
 		let quantity = $("quantity").value;
-		console.log("quantity is " + quantity);
-		ajaxGET("backend/generate.php?format=p&grammar=" + grammar + "&key=" + key + "&quantity=" + quantity, function(html) {
-			$("output").innerHTML = html;
+		// queries generate.php for random output based onvalues
+		ajaxGET("backend/generate.php?format=p&grammar=" + grammar +
+				"&key=" + key + "&quantity=" + quantity, function(x) {
+			$("output").innerHTML = x;
 		});
 	}
 	
-	function loadGrammarOptions(json) {
-		loadOptionsJSON($("grammar"), json);
-		ajaxGET("backend/info.php?mode=list&grammar=" + $("grammar").value, loadKeyOptions);
+	// populates the "grammar" selector with valid options, obtained
+	// from backend/info.php in JSON format
+	function loadGrammarOptions() {
+		ajaxGET("backend/info.php?mode=list", function(json) {
+			loadOptionsJSON($("grammar"), json);
+		});
 	}
 	
-	function loadKeyOptions(json) {
-		loadOptionsJSON($("key"), json);
-		generate();
+	// populates the "key" selector with valid options, obtained from
+	// backend/info.php in JSON format
+	function loadKeyOptions() {
+		let grammar = $("grammar").value
+		ajaxGET("backend/info.php?mode=list&grammar=" + grammar,
+				function(json) {
+			loadOptionsJSON($("key"), json);
+			generate();
+		});
 	}
 	
+	// abstracted method to load JSON options into a given DOM element
+	// used to load both "grammar" and "key" selector options
 	function loadOptionsJSON(select, json) {
+		// clears all prior options
 		while (select.firstChild) {
 			select.removeChild(select.firstChild);
 		}
+		// iterates through JSON for option attributes to put in
+		// based on the format in each display.txt, parsed through
+		// info.php
 		let data = JSON.parse(json);
 		for (let i = 0; i < data.length; i++) {
 			let option = ce("option");
