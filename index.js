@@ -7,11 +7,10 @@
 *************************************************************************/
 
 "use strict";
-(function() {
+!function() {
 	
-	// shortened DOM manipulation methods
+	// shorthand to get DOM with ID
 	function $(id) { return document.getElementById(id); }
-	function ce(tag) { return document.createElement(tag); }
 	// generic AJAX GET method, adapted from my code hosted online at
 	// https://brennancolberg.github.io/abbr/js/ajax.js
 	function ajaxGET(url, onSuccess) {
@@ -83,11 +82,11 @@
 		// info.php
 		let data = JSON.parse(json);
 		for (let i = 0; i < data.length; i++) {
-			let option = ce("option");
+			let option = document.createElement("option");
 			option.value = data[i]["key"];
 			option.textContent = data[i]["name"];
 			select.appendChild(option);
 		}
 	}
 	
-})();
+}();
