@@ -1,11 +1,16 @@
+:root {
+	--dark-color: #FF6347;
+	--light-color: #FFFACD;
+}
+
 body {
-	background-color: #FFFACD;
+	background-color: var(--light-color);
 	font-size: 14pt;
 }
 
 .bordered {
 	border-radius: 8px;
-	border: 2px solid #FF6347;
+	border: 2px solid var(--dark-color);
 }
 
 section {
@@ -38,7 +43,7 @@ section {
 }
 
 button {
-	background-color: #FF6347;
+	background-color: var(--dark-color);
 	color: white;
 	font-size: inherit;
 	padding: 10px 20px;
