@@ -250,7 +250,7 @@ wet
 wooden
 abundant
 full
-incalcuable
+incalculable
 limited
 little
 scarce
