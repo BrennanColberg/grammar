@@ -17,14 +17,14 @@ GET REQUEST FORMAT:
  *		coded definitions for the given key within the given grammar
 NO POST REQUEST FORMAT
  
-*************************************************************************/
+ *************************************************************************/
 
 header('Content-Type: application/json');
 include('grammarParser.php');
 
 # getting input from GET request
-$grammar = $_GET["grammar"];
-$key = $_GET["key"];
+$grammar = $_GET["grammar"] ?? null;
+$key = $_GET["key"] ?? null;
 
 # prints a JSON-format array of the potential definitions for a
 # specified key within a specified grammar, each in string form
@@ -82,5 +82,3 @@ else {
 		print(json_encode($result));
 	}
 }
-
-?>

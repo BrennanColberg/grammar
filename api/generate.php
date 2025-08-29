@@ -20,16 +20,16 @@ GET REQUEST FORMAT:
  *	makes output come in format <p>text</p>)
 NO POST REQUEST FORMAT
 
-*************************************************************************/
+ *************************************************************************/
 
 header('Content-Type: text/html');
 include("grammarParser.php");
 
 # loading GET inputs
-$grammar = parse_grammar($_GET["grammar"]);
-$string = $_GET["string"];
-$quantity = $_GET["quantity"];
-$format = $_GET["format"]; # hella vulnerable to HTML injection
+$grammar = parse_grammar($_GET["grammar"] ?? "");
+$string = $_GET["string"] ?? "";
+$quantity = $_GET["quantity"] ?? null;
+$format = $_GET["format"] ?? null; # hella vulnerable to HTML injection
 
 # checking that the grammar exists
 if (!$grammar) exit();
@@ -48,13 +48,14 @@ for ($i = 0; $i < $quantity; $i++) {
 # recursive function that takes in a string and continually replaces
 # each valid grammatical key with one of its definitions at random until
 # all keys have been fulfilled
-function fulfill_keys($string, $grammar) {
+function fulfill_keys($string, $grammar)
+{
 	# iterates through each key in the grammar
 	for ($i = 0; $i < count(array_keys($grammar)); $i++) {
 		$key = array_keys($grammar)[$i];
 		# every time there's an instance of the key in the string...
 		while (strpos($string, $key) !== false) {
-			
+
 			### SELECTS VALID DEFINITION ###
 			# chooses one of the key's definitions at random
 			$definition_index = mt_rand(0, count($grammar[$key]) - 1);
@@ -63,21 +64,21 @@ function fulfill_keys($string, $grammar) {
 			# with their definitions, before moving on to use it in
 			# the final resulting string
 			$definition = fulfill_keys($definition, $grammar);
-			
+
 			### REPLACES KEY WITH DEFINITION ###
 			# finds the index where the key exists in the string
 			$key_index = strpos($string, $key);
 			# separates out the parts of the string before and after the
 			# key's first instance
 			$prior_string = substr($string, 0, $key_index);
-			$latter_string = substr($string, $key_index + strlen($key),
-					strlen($string) - strlen($key));
+			$latter_string = substr(
+				$string,
+				$key_index + strlen($key),
+				strlen($string) - strlen($key)
+			);
 			# inserts definition in the key's old place
 			$string = $prior_string . $definition . $latter_string;
-			
 		}
 	}
 	return $string;
 }
-
-?>
